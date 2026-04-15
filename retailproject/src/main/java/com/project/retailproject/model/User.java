@@ -18,16 +18,10 @@ public class User {
     String  email;
     String phoneNumber;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
-    AuditLog auditLog;
 
-    public AuditLog getAuditLog() {
-        return auditLog;
-    }
 
-    public void setAuditLog(AuditLog auditLog) {
-        this.auditLog = auditLog;
-    }
+
+
 
     public int getUserId() {
         return userId;
@@ -79,7 +73,6 @@ public class User {
                 ", roles='" + roles + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber=" + phoneNumber +
-                ", auditLog=" + auditLog +
                 '}';
     }
 
@@ -87,11 +80,11 @@ public class User {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId == user.userId && phoneNumber == user.phoneNumber && Objects.equals(userName, user.userName) && Objects.equals(roles, user.roles) && Objects.equals(email, user.email) && Objects.equals(auditLog, user.auditLog);
+        return userId == user.userId && phoneNumber == user.phoneNumber && Objects.equals(userName, user.userName) && Objects.equals(roles, user.roles) && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, userName, roles, email, phoneNumber, auditLog);
+        return Objects.hash(userId, userName, roles, email, phoneNumber);
     }
 }
