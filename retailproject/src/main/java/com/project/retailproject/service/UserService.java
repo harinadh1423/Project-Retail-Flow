@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,6 +41,14 @@ public class UserService {
     public User getUser(int id) {
         return userRepository.findById(id).get();
     }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
+
+    }
+
+
+
 
 
 
