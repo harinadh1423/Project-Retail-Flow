@@ -2,7 +2,7 @@ package com.project.retailproject.dto;
 
 import com.project.retailproject.model.AuditLog;
 
-public class AuditDTO {
+public class AuditLogDTO {
 
     private AuditLog auditLog;
 
