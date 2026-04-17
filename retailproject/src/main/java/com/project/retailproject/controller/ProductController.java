@@ -1,6 +1,7 @@
 package com.project.retailproject.controller;
 
 
+import com.project.retailproject.dto.ProductDTO;
 import com.project.retailproject.dto.ProductResponseDTO;
 import com.project.retailproject.model.Product;
 import com.project.retailproject.service.ProductService;
@@ -17,8 +18,8 @@ public class ProductController {
 
 
     @PostMapping("/addProduct")
-    public ResponseEntity<ProductResponseDTO> addProduct(@RequestBody ProductResponseDTO productResponseDTO) {
-        Product product = productService.addProduct(productResponseDTO.getProduct());
+    public ResponseEntity<ProductResponseDTO> addProduct(@RequestBody ProductDTO productDTO) {
+        Product product = productService.addProduct(productDTO.getProduct());
         ProductResponseDTO responseDTO = new ProductResponseDTO();
         responseDTO.setProduct(product);
         responseDTO.setMessage("Product added successfully");
@@ -27,14 +28,18 @@ public class ProductController {
     }
 
     @DeleteMapping("/deleteProduct")
-    public void deleteProduct(@RequestBody ProductResponseDTO productResponseDTO) {
-        productService.deleteProduct(productResponseDTO.getProduct());
+    public ResponseEntity<ProductResponseDTO> deleteProduct(@RequestBody ProductDTO productDTO) {
+        productService.deleteProduct(productDTO.getProduct());
+        ProductResponseDTO responseDTO = new ProductResponseDTO();
+        responseDTO.setMessage("Product deleted successfully");
+        responseDTO.setStatusCode(200);
+        return ResponseEntity.ok().body(responseDTO);
     }
 
 
     @PutMapping("/updateProduct")
-    public ResponseEntity<ProductResponseDTO> updateProduct(@RequestBody ProductResponseDTO productResponseDTO) {
-        Product product = productService.updateProduct(productResponseDTO.getProduct());
+    public ResponseEntity<ProductResponseDTO> updateProduct(@RequestBody ProductDTO productDTO) {
+        Product product = productService.updateProduct(productDTO.getProduct());
         ProductResponseDTO responseDTO = new ProductResponseDTO();
         responseDTO.setProduct(product);
         responseDTO.setMessage("Product updated successfully");
@@ -44,9 +49,9 @@ public class ProductController {
 
 
 
-    @GetMapping("/productById")
-    public ResponseEntity<ProductResponseDTO> getProduct(@RequestBody ProductResponseDTO productResponseDTO) {
-        Product product = productService.getProduct(productResponseDTO.getProduct().getProductId());
+    @PutMapping("/productById")
+    public ResponseEntity<ProductResponseDTO> getProduct(@RequestBody ProductDTO productDTO) {
+        Product product = productService.getProduct(productDTO.getProduct().getProductId());
         ProductResponseDTO responseDTO = new ProductResponseDTO();
 
         responseDTO.setProduct(product);

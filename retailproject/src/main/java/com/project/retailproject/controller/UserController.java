@@ -39,7 +39,7 @@ public class UserController {
         return ResponseEntity.ok().body(userResponseDTO);
     }
 
-    @GetMapping("/userById")
+    @PostMapping("/userById")
     public ResponseEntity<UserResponseDTO> getById(@RequestBody UserDTO userDTO) {
         User user = userService.getUser(userDTO.getUser().getUserId());
         UserResponseDTO userResponseDTO = new UserResponseDTO();
@@ -49,8 +49,15 @@ public class UserController {
         return ResponseEntity.ok().body(userResponseDTO);
     }
 
-    public void deleteUser(@RequestBody UserDTO userDTO) {
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<UserResponseDTO> deleteUser(@RequestBody UserDTO userDTO) {
         userService.deleteUser(userDTO.getUser().getUserId());
+        UserResponseDTO userResponseDTO = new UserResponseDTO();
+        userResponseDTO.setMessage("Successfully deleted the user");
+        userResponseDTO.setStatusCode(200);
+        return ResponseEntity.ok().body(userResponseDTO);
+
     }
 
 }
