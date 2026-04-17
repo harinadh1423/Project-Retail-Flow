@@ -2,7 +2,7 @@ package com.project.retailproject.dto;
 
 import com.project.retailproject.model.Catalog;
 
-public class CatologDTO {
+public class CatalogDTO {
 
     private Catalog catalog;
 
