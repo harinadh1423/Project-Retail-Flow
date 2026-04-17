@@ -17,7 +17,6 @@ public class AuditLogService {
 
     }
 
-
     public AuditLog updateAuditLog(AuditLog auditLog) {
         return auditLogRepository.save(auditLog);
 

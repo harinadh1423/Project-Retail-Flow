@@ -13,11 +13,6 @@ public class NotificationService {
     @Autowired
     private  NotificationRepository notificationRepository;
 
-    // Constructor injection (recommended)
-    public NotificationService(NotificationRepository notificationRepository) {
-        this.notificationRepository = notificationRepository;
-    }
-
     public Notification insertNotification(Notification notification) {
         return notificationRepository.save(notification);
     }

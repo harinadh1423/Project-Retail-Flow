@@ -13,10 +13,6 @@ public class PaymentService {
     @Autowired
     private PaymentRepository paymentRepository;
 
-    public PaymentService(PaymentRepository paymentRepository) {
-        this.paymentRepository = paymentRepository;
-    }
-
     public Payment insertPayment(Payment payment) {
         return paymentRepository.save(payment);
     }
