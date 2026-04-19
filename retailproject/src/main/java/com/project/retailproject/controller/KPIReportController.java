@@ -40,8 +40,6 @@ public class KPIReportController {
     public ResponseEntity<List<KPIReport>> getTrend(@PathVariable String scope, @PathVariable int days) {
         List<KPIReport> trends = kpiReportService.getTrendData(scope, days);
 
-        // For lists, we usually return the list directly,
-        // but you could wrap this in a ResponseDTO too if you add a List field to it.
         return ResponseEntity.ok(trends);
     }
 }
