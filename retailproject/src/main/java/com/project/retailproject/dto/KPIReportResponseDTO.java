@@ -16,6 +16,7 @@ public class KPIReportResponseDTO {
         this.kpiReport = kpiReport;
     }
 
+
     public String getMessage() {
         return message;
     }

@@ -6,6 +6,7 @@ public class KPIReportDTO {
 
     private KPIReport kpiReport;
 
+
     public KPIReport getKpiReport() {
         return kpiReport;
     }
@@ -13,4 +14,6 @@ public class KPIReportDTO {
     public void setKpiReport(KPIReport kpiReport) {
         this.kpiReport = kpiReport;
     }
+
+
 }

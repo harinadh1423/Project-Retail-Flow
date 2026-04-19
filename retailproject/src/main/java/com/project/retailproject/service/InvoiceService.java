@@ -23,7 +23,8 @@ public class InvoiceService {
     public Invoice findInvoiceById(Long id){
         return invoiceRepository.findById(id).get();
     }
-    public List<Invoice> findAllInvoice(Invoice invoice){
+    public List<Invoice> findAllInvoice(){
         return invoiceRepository.findAll();
     }
 }
+
