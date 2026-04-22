@@ -26,7 +26,8 @@ public class SaleService {
     }
 
     public Sale getSaleById(Long id){
-        return saleRepository.findById(id).get();
+        return saleRepository.findById(id).orElseThrow(
+                ()->new RuntimeException("Sale not found with ID: "+id));
     }
 
     public List<Sale> getAllSales(){

@@ -24,7 +24,7 @@ public class SaleController {
         dto.setSale(s);
         dto.setStatusCode(201);
         dto.setMessage("Sale created successfully.");
-        return ResponseEntity.status(201).body(dto);
+        return ResponseEntity.ok().body(dto);
     }
 
     @PutMapping("/update")
@@ -32,15 +32,15 @@ public class SaleController {
         Sale s=this.saleservice.updateSale(saleDTO.getSale());
         SaleResponseDTO dto=new SaleResponseDTO();
         dto.setSale(s);
-        dto.setStatusCode(201);
+        dto.setStatusCode(200);
         dto.setMessage("Sale updated successfully.");
-        return ResponseEntity.status(201).body(dto);
+        return ResponseEntity.ok().body(dto);
     }
 
-    @DeleteMapping("/delete")
-    public String deleteSale(@PathVariable Long saleId) {
+    @DeleteMapping("/delete/{saleId}")
+    public ResponseEntity<String> deleteSale(@PathVariable Long saleId) {
         saleservice.deleteSale(saleId);
-        return "Sale deleted successfully";
+        return ResponseEntity.ok().body("Sale deleted successfully.");
     }
 
     @GetMapping("/fetch/{saleId}")
@@ -50,13 +50,13 @@ public class SaleController {
         dto.setSale(s);
         dto.setStatusCode(200);
         dto.setMessage("Found sale with ID: " + saleId);
-        return ResponseEntity.status(200).body(dto);
+        return ResponseEntity.ok().body(dto);
     }
 
     @GetMapping("/fetchAll")
     public ResponseEntity<List<Sale>> getAllSales() {
         List<Sale> sales = saleservice.getAllSales();
-        return ResponseEntity.status(200).body(sales);
+        return ResponseEntity.ok().body(sales);
     }
 
 }

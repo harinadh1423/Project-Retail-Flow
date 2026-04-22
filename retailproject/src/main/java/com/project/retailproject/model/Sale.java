@@ -2,7 +2,7 @@ package com.project.retailproject.model;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -21,7 +21,7 @@ public class Sale {
     private Double amount;
 
 
-    private Date date;
+    private LocalDate date;
 
     private String status;
 
@@ -65,11 +65,11 @@ public class Sale {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

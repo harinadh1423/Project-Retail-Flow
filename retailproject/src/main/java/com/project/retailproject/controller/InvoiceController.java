@@ -30,11 +30,11 @@ public class InvoiceController {
         Invoice i=this.invoiceService.updateInvoice(invoiceDTO.getInvoice());
         InvoiceResponseDTO dto=new InvoiceResponseDTO();
         dto.setInvoice(i);
-        dto.setStatusCode(201);
+        dto.setStatusCode(200);
         dto.setMessage("Invoice updated Successfully");
-        return ResponseEntity.status(201).body(dto);
+        return ResponseEntity.ok().body(dto);
     }
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{invoiceId}")
     public String deleteInvoice(@PathVariable Long invoiceId){
         invoiceService.deleteInvoice(invoiceId);
         return  "Invoice deleted Successfully";
@@ -47,13 +47,13 @@ public class InvoiceController {
         dto.setInvoice(i);
         dto.setStatusCode(200);
         dto.setMessage("Found invoice with ID: "+invoiceId);
-        return ResponseEntity.status(200).body(dto);
+        return ResponseEntity.ok().body(dto);
 
     }
     @GetMapping("/fetchAll")
     public ResponseEntity<List<Invoice>> findAllInvoice(){
         List<Invoice> i=invoiceService.findAllInvoice();
-        return ResponseEntity.status(200).body(i);
+        return ResponseEntity.ok().body(i);
     }
 
 

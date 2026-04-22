@@ -44,7 +44,7 @@ public class AuditLog {
     }
 
     public void setAction(String action) {
-        action = action;
+        this.action = this.action;
     }
 
     public LocalDateTime getTimeStamp() {

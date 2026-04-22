@@ -12,18 +12,24 @@ public class InvoiceService {
     @Autowired
     InvoiceRepository invoiceRepository;
     public Invoice insertInvoice(Invoice invoice){
+
         return invoiceRepository.save(invoice);
     }
+
     public Invoice updateInvoice(Invoice invoice){
+
         return invoiceRepository.save(invoice);
     }
     public void deleteInvoice(Long id){
-         invoiceRepository.deleteById(id);
+
+        invoiceRepository.deleteById(id);
     }
+
     public Invoice findInvoiceById(Long id){
-        return invoiceRepository.findById(id).get();
+        return invoiceRepository.findById(id).orElseThrow(()->new RuntimeException("Invoice not found with ID: "+id));
     }
     public List<Invoice> findAllInvoice(){
+
         return invoiceRepository.findAll();
     }
 }
