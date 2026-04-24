@@ -3,6 +3,8 @@ package com.project.retailproject.service;
 import com.project.retailproject.db.AuditLogRepository;
 import com.project.retailproject.model.AuditLog;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +34,10 @@ public class AuditLogService {
 
     public List<AuditLog> getAllAuditLog() {
         return auditLogRepository.findAll();
+    }
+
+    public Page<AuditLog> getAuditLogPaginated(Pageable pageable) {
+        return auditLogRepository.findAll(pageable);
     }
 
 }

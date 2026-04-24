@@ -5,8 +5,12 @@ import com.project.retailproject.dto.SaleResponseDTO;
 import com.project.retailproject.model.Sale;
 import com.project.retailproject.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -17,6 +21,8 @@ public class SaleController {
     @Autowired
     private SaleService saleservice;
 
+
+
     @PostMapping("/insert")
     public ResponseEntity<SaleResponseDTO> insertSale(@RequestBody SaleDTO saleDTO){
         Sale s=this.saleservice.insertSale(saleDTO.getSale());
@@ -24,7 +30,7 @@ public class SaleController {
         dto.setSale(s);
         dto.setStatusCode(201);
         dto.setMessage("Sale created successfully.");
-        return ResponseEntity.ok().body(dto);
+        return ResponseEntity.status(201).body(dto);
     }
 
     @PutMapping("/update")
@@ -34,7 +40,7 @@ public class SaleController {
         dto.setSale(s);
         dto.setStatusCode(200);
         dto.setMessage("Sale updated successfully.");
-        return ResponseEntity.ok().body(dto);
+        return ResponseEntity.status(200).body(dto);
     }
 
     @DeleteMapping("/delete/{saleId}")
@@ -58,5 +64,30 @@ public class SaleController {
         List<Sale> sales = saleservice.getAllSales();
         return ResponseEntity.ok().body(sales);
     }
+
+
+
+    @GetMapping("/fetchAllPagination")
+    public ResponseEntity<Page<Sale>> getAllSalesPaginated(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "saleId") String sorting,
+            @RequestParam(defaultValue = "true") boolean asc
+    ) {
+        Sort sort = asc
+                ? Sort.by(sorting).ascending()
+                : Sort.by(sorting).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<Sale> sales = saleservice.getAllSalesPaginated(pageable);
+
+        return ResponseEntity.ok(sales);
+    }
+
+
+
+
+
+
 
 }

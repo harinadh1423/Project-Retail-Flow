@@ -3,8 +3,13 @@ package com.project.retailproject.controller;
 import com.project.retailproject.dto.InvoiceDTO;
 import com.project.retailproject.dto.InvoiceResponseDTO;
 import com.project.retailproject.model.Invoice;
+import com.project.retailproject.model.Sale;
 import com.project.retailproject.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,6 +60,28 @@ public class InvoiceController {
         List<Invoice> i=invoiceService.findAllInvoice();
         return ResponseEntity.ok().body(i);
     }
+
+
+
+    @GetMapping("/fetchAllPagination")
+    public ResponseEntity<Page<Invoice>> getAllInvoicesPagination(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue="invoiceId") String sorting,
+            @RequestParam(defaultValue = "true") boolean asc
+    ) {
+        Sort sort = asc
+                ? Sort.by(sorting).ascending()
+                : Sort.by(sorting).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<Invoice> invoice = invoiceService.getAllInvoicesPaginated(pageable);
+
+        return ResponseEntity.ok(invoice);
+
+    }
+
+
 
 
 }

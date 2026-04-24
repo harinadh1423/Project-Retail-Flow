@@ -5,6 +5,7 @@ import com.project.retailproject.dto.CatalogResponseDTO;
 import com.project.retailproject.model.Catalog;
 import com.project.retailproject.service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,5 +56,14 @@ public class CatalogController {
     public ResponseEntity<String> deleteCatalog(@PathVariable Long id){
         catalogService.deleteCatalog(id);
         return ResponseEntity.ok().body("Successfully deleted the catalog");
+    }
+
+    @GetMapping("/fetchAllPagination")
+    public ResponseEntity<Page<Catalog>> getAllSalesWithPagination(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Page<Catalog> catalogsPage = catalogService.getAllCatalogsWithPagination(page, size);
+        return ResponseEntity.ok(catalogsPage);
     }
 }

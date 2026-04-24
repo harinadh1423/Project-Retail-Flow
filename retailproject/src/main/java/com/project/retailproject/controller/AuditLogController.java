@@ -4,7 +4,12 @@ import com.project.retailproject.dto.AuditLogDTO;
 import com.project.retailproject.dto.AuditResponseDTO;
 import com.project.retailproject.model.AuditLog;
 import com.project.retailproject.service.AuditLogService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,6 +62,21 @@ public class AuditLogController {
     public ResponseEntity<String> deleteAuditLog(@PathVariable int auditID) {
         auditLogService.deleteAuditLog(auditID);
         return ResponseEntity.ok().body("Successfully deleted the auditLog");
+    }
+
+    @GetMapping("getAllAuditPaginated")
+    public  ResponseEntity<Page<AuditLog>> getAuditLogByPage(@RequestParam(defaultValue = "0") int page,
+                                                             @RequestParam(defaultValue = "10") int size,
+                                                             @RequestParam(defaultValue = "auditId") String sorting,
+                                                             @RequestParam(defaultValue = "true") boolean asc){
+        Sort sort = asc
+                ? Sort.by(sorting).ascending()
+                : Sort.by(sorting).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<AuditLog> audit = auditLogService.getAuditLogPaginated(pageable);
+        return ResponseEntity.ok().body(audit);
+
     }
 
 

@@ -2,9 +2,11 @@ package com.project.retailproject.controller;
 
 import com.project.retailproject.dto.KPIReportDTO;
 import com.project.retailproject.dto.KPIReportResponseDTO;
+import com.project.retailproject.model.Catalog;
 import com.project.retailproject.model.KPIReport;
 import com.project.retailproject.service.KPIReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +43,14 @@ public class KPIReportController {
         List<KPIReport> trends = kpiReportService.getTrendData(scope, days);
 
         return ResponseEntity.ok(trends);
+    }
+
+    @GetMapping("/fetchAllPagination")
+    public ResponseEntity<Page<KPIReport>> getAllKPIReportsWithPagination(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Page<KPIReport> kPIReportsPage = kpiReportService.getAllPagesWithPagination(page, size);
+        return ResponseEntity.ok(kPIReportsPage);
     }
 }

@@ -5,6 +5,10 @@ import com.project.retailproject.dto.NotificationResponseDTO;
 import com.project.retailproject.model.Notification;
 import com.project.retailproject.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,5 +61,18 @@ public class NotificationController {
     public String deleteNotification(@PathVariable int id) {
         notificationService.deleteNotification(id);
         return "Notification with ID deleted successfully";
+    }
+
+    public ResponseEntity<Page<Notification>> getNotificationsByPage(@RequestParam(defaultValue = "0") int page,
+                                                                     @RequestParam(defaultValue = "10") int size,
+                                                                     @RequestParam(defaultValue = "notificationId") String sorting,
+                                                                     @RequestParam(defaultValue = "true") boolean asc) {
+        Sort sort = asc
+                ? Sort.by(sorting).ascending()
+                : Sort.by(sorting).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<Notification> notifications = notificationService.getAllNotification(pageable);
+        return ResponseEntity.ok().body(notifications);
     }
 }
