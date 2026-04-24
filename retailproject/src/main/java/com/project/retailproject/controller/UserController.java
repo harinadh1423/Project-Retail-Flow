@@ -5,6 +5,10 @@ import com.project.retailproject.dto.UserResponseDTO;
 import com.project.retailproject.model.User;
 import com.project.retailproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,6 +61,20 @@ public class UserController {
         userResponseDTO.setMessage("Successfully deleted the user");
         userResponseDTO.setStatusCode(200);
         return ResponseEntity.ok().body(userResponseDTO);
+
+    }
+    @GetMapping("fetchAllUserPaginated")
+    public ResponseEntity<Page<User>> getAllUsersPaginated(@RequestParam(defaultValue = "0") int page,
+                                                              @RequestParam(defaultValue = "10") int size,
+                                                              @RequestParam(defaultValue = "userId") String sorting,
+                                                              @RequestParam(defaultValue = "true") boolean asc) {
+        Sort sort = asc
+                ? Sort.by(sorting).ascending()
+                : Sort.by(sorting).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<User> user = userService.getAllUserPaginated(pageable);
+        return ResponseEntity.ok().body(user);
 
     }
 

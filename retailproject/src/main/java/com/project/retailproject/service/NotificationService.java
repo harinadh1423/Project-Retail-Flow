@@ -3,6 +3,8 @@ package com.project.retailproject.service;
 import com.project.retailproject.db.NotificationRepository;
 import com.project.retailproject.model.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,5 +33,9 @@ public class NotificationService {
 
     public List<Notification> getAllNotification() {
         return notificationRepository.findAll();
+    }
+
+    public Page<Notification> getAllNotification(Pageable pageable) {
+        return notificationRepository.findAll(pageable);
     }
 }

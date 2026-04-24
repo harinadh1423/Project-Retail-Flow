@@ -7,6 +7,8 @@ import com.project.retailproject.dto.UserDTO;
 import com.project.retailproject.dto.UserResponseDTO;
 import com.project.retailproject.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +47,10 @@ public class UserService {
     public List<User> getUsers() {
         return userRepository.findAll();
 
+    }
+
+    public Page<User>  getAllUserPaginated(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
 
