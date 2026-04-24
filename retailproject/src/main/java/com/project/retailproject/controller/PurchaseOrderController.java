@@ -2,9 +2,11 @@ package com.project.retailproject.controller;
 
 import com.project.retailproject.dto.PurchaseOrderDTO;
 import com.project.retailproject.dto.PurchaseOrderResponseDTO;
+import com.project.retailproject.model.Inventory;
 import com.project.retailproject.model.PurchaseOrder;
 import com.project.retailproject.service.PurchaseOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +39,7 @@ public class PurchaseOrderController {
         return ResponseEntity.status(200).body(dto);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     public String deletePurchaseOrder(@PathVariable Long id){
         purchaseOrderService.deletePurchaseOrder(id);
         return "Purchase order deleted successfully";
@@ -58,4 +60,13 @@ public class PurchaseOrderController {
         List<PurchaseOrder> orders=purchaseOrderService.getAllPurchaseOrders();
         return ResponseEntity.status(200).body(orders);
     }
+    @GetMapping("/fetchAllPagination")
+    public ResponseEntity<Page<PurchaseOrder>> getAllPurchaseOrderWithPagination(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Page<PurchaseOrder> purchaseOrdersPage = purchaseOrderService.getAllPurchaseOrderWithPagination(page, size);
+        return ResponseEntity.ok(purchaseOrdersPage);
+    }
+
 }

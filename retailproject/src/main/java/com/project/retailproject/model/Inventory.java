@@ -71,6 +71,7 @@ public class Inventory {
         this.status = status;
     }
 
+
     public Inventory() {
         super();
     }
