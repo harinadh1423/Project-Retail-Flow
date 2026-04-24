@@ -2,12 +2,8 @@ package com.project.retailproject.service;
 
 
 import com.project.retailproject.db.ProductRepository;
-import com.project.retailproject.model.Catalog;
 import com.project.retailproject.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,12 +15,6 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public Product addProduct(Product product) {
-
-        if(product.getCatalogs()!= null){
-            for (Catalog catalog : product.getCatalogs()){
-                catalog.setProduct(product);
-            }
-        }
         return productRepository.save(product);
     }
 
@@ -33,26 +23,14 @@ public class ProductService {
     }
 
     public Product updateProduct(Product product) {
-
-        if (product.getCatalogs() != null) {
-            for (Catalog catalog : product.getCatalogs()) {
-                catalog.setProduct(product);
-            }
-        }
-
         return productRepository.save(product);
     }
-    public void deleteProduct(int productId) {
-        productRepository.deleteById(productId);
+    public void deleteProduct(Product product) {
+        productRepository.delete(product);
 
     }
 
     public Product getProduct(int id) {
         return productRepository.findById(id).get();
-    }
-
-    public Page<Product> getAllPagesWithPagination(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return productRepository.findAll(pageable);
     }
 }

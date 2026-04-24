@@ -11,7 +11,10 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notificationId;
 
+    @ManyToOne
+    @JoinColumn(name = "userId")
     private Long userId;
+
     private String message;
     private String category;
     private String status;
