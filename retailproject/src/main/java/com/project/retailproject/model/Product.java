@@ -1,6 +1,7 @@
 package com.project.retailproject.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -13,12 +14,31 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
+    private String productName;
     private String category;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public List<Catalog> getCatalogs() {
+        return catalogs;
+    }
+
+    public void setCatalogs(List<Catalog> catalogs) {
+        this.catalogs = catalogs;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     private double price;
     private String status;
 
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
+    @JsonManagedReference
     private List<Catalog> catalogs;
 
 
@@ -61,6 +81,7 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "productId=" + productId +
+                ", productName='" + productName + '\'' +
                 ", category='" + category + '\'' +
                 ", price=" + price +
                 ", status='" + status + '\'' +
@@ -72,11 +93,11 @@ public class Product {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return productId == product.productId && Double.compare(price, product.price) == 0 && Objects.equals(category, product.category) && Objects.equals(status, product.status) && Objects.equals(catalogs, product.catalogs);
+        return productId == product.productId && Double.compare(price, product.price) == 0 && Objects.equals(productName, product.productName) && Objects.equals(category, product.category) && Objects.equals(status, product.status) && Objects.equals(catalogs, product.catalogs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, category, price, status, catalogs);
+        return Objects.hash(productId, productName, category, price, status, catalogs);
     }
 }

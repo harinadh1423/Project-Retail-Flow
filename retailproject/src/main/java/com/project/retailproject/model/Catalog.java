@@ -1,6 +1,7 @@
 package com.project.retailproject.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -15,6 +16,7 @@ public class Catalog {
 
     @ManyToOne
     @JoinColumn(name = "productId")
+    @JsonBackReference
     private Product product;
 
 
