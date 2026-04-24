@@ -27,13 +27,10 @@ public class ProductController {
         return ResponseEntity.ok().body(responseDTO);
     }
 
-    @DeleteMapping("/deleteProduct")
-    public ResponseEntity<ProductResponseDTO> deleteProduct(@RequestBody ProductDTO productDTO) {
-        productService.deleteProduct(productDTO.getProduct());
-        ProductResponseDTO responseDTO = new ProductResponseDTO();
-        responseDTO.setMessage("Product deleted successfully");
-        responseDTO.setStatusCode(200);
-        return ResponseEntity.ok().body(responseDTO);
+    @DeleteMapping("/deleteProduct/{prodId}")
+    public ResponseEntity<String> deleteProduct(@PathVariable int prodId) {
+        productService.deleteProduct(prodId);
+        return ResponseEntity.status(200).body("Product deleted successfully");
     }
 
 
@@ -49,7 +46,7 @@ public class ProductController {
 
 
 
-    @PutMapping("/productById")
+    @GetMapping("/productById")
     public ResponseEntity<ProductResponseDTO> getProduct(@RequestBody ProductDTO productDTO) {
         Product product = productService.getProduct(productDTO.getProduct().getProductId());
         ProductResponseDTO responseDTO = new ProductResponseDTO();
