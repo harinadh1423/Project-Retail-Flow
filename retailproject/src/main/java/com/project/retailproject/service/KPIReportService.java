@@ -2,7 +2,11 @@ package com.project.retailproject.service;
 
 import com.project.retailproject.db.KPIReportRepository;
 import com.project.retailproject.model.KPIReport;
+import com.project.retailproject.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,4 +30,9 @@ public class KPIReportService {
         cal.add(Calendar.DATE, -lastXDays);
         Date startDate = cal.getTime();
         return kpiReportRepository.findByScopeAndGeneratedDateAfter(scope, startDate);    }
+
+    public Page<KPIReport> getAllPagesWithPagination(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return kpiReportRepository.findAll(pageable);
+    }
 }
