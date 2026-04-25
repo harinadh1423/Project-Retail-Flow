@@ -13,7 +13,7 @@ public class Notification {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    private Long userId;
+    private int userId;
 
     private String message;
     private String category;
@@ -30,11 +30,11 @@ public class Notification {
         this.notificationId = notificationId;
     }
 
-    public Long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
