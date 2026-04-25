@@ -88,7 +88,6 @@ public class Sale {
     public String toString() {
         return "Sale{" +
                 "saleId=" + saleId +
-                ", product=" + product +
                 ", customerId=" + customerId +
                 ", quantity=" + quantity +
                 ", amount=" + amount +

@@ -80,7 +80,6 @@ public class Payment {
     public String toString() {
         return "Payment{" +
                 "paymentId=" + paymentId +
-                ", invoice=" + invoice +
                 ", amount=" + amount +
                 ", date=" + date +
                 ", method='" + method + '\'' +

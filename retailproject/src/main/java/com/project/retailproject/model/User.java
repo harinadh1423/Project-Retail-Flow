@@ -19,7 +19,6 @@ public class User {
     String phoneNumber;
 
 
-
     public int getUserId() {
         return userId;
     }
