@@ -16,8 +16,6 @@ public class PurchaseOrder {
 
 
     private Date orderDate;
-
-
     private Date expectedDeliveryDate;
 
     private String status;
@@ -65,14 +63,20 @@ public class PurchaseOrder {
     public void setStatus(String status) {
         this.status = status;
     }
+    public Product getProduct() {
+        return product;
+    }
 
+    public void setProduct(Product product) {
+        this.product = product;
+    }
     public PurchaseOrder() {
     }
 
     @Override
     public String toString() {
         return "PurchaseOrder{" +
-                "poId=" + purchaseOrderId +
+                "purchaseOrderId=" + purchaseOrderId +
                 ", supplierId=" + supplierId +
                 ", orderDate=" + orderDate +
                 ", expectedDeliveryDate=" + expectedDeliveryDate +

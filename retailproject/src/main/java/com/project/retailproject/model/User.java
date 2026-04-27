@@ -14,7 +14,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int userId;
     String userName;
-    String  roles;
+    String  role;
     String  email;
     String phoneNumber;
 
@@ -36,11 +36,11 @@ public class User {
     }
 
     public String getRoles() {
-        return roles;
+        return role;
     }
 
     public void setRoles(String roles) {
-        this.roles = roles;
+        this.role = roles;
     }
     public String getEmail() {
         return email;
@@ -66,7 +66,7 @@ public class User {
         return "User{" +
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
-                ", roles='" + roles + '\'' +
+                ", roles='" + role + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 '}';
@@ -76,11 +76,11 @@ public class User {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId == user.userId && phoneNumber == user.phoneNumber && Objects.equals(userName, user.userName) && Objects.equals(roles, user.roles) && Objects.equals(email, user.email);
+        return userId == user.userId && phoneNumber == user.phoneNumber && Objects.equals(userName, user.userName) && Objects.equals(role, user.role) && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, userName, roles, email, phoneNumber);
+        return Objects.hash(userId, userName, role, email, phoneNumber);
     }
 }
