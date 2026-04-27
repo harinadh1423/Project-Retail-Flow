@@ -20,9 +20,9 @@ public class PurchaseOrderController {
     private PurchaseOrderService purchaseOrderService;
 
     @PostMapping("/insert")
-    public ResponseEntity<PurchaseOrderResponseDTO> insertPurchaseOrder(@RequestBody PurchaseOrderDTO purchaseOrderDTO){
-        PurchaseOrder po=this.purchaseOrderService.insertPurchaseOrder(purchaseOrderDTO.getPurchaseOrder());
-        PurchaseOrderResponseDTO dto=new PurchaseOrderResponseDTO();
+    public ResponseEntity<PurchaseOrderResponseDTO> insertPurchaseOrder(@RequestBody PurchaseOrderDTO purchaseOrderDTO) {
+        PurchaseOrder po = this.purchaseOrderService.insertPurchaseOrder(purchaseOrderDTO.getPurchaseOrder());
+        PurchaseOrderResponseDTO dto = new PurchaseOrderResponseDTO();
         dto.setPurchaseOrder(po);
         dto.setStatusCode(201);
         dto.setMessage("Purchase order inserted successfully");
@@ -30,9 +30,9 @@ public class PurchaseOrderController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<PurchaseOrderResponseDTO> updatePurchaseOrder(@RequestBody PurchaseOrderDTO purchaseOrderDTO){
-        PurchaseOrder po=this.purchaseOrderService.updatePurchaseOrder(purchaseOrderDTO.getPurchaseOrder());
-        PurchaseOrderResponseDTO dto=new PurchaseOrderResponseDTO();
+    public ResponseEntity<PurchaseOrderResponseDTO> updatePurchaseOrder(@RequestBody PurchaseOrderDTO purchaseOrderDTO) {
+        PurchaseOrder po = this.purchaseOrderService.updatePurchaseOrder(purchaseOrderDTO.getPurchaseOrder());
+        PurchaseOrderResponseDTO dto = new PurchaseOrderResponseDTO();
         dto.setPurchaseOrder(po);
         dto.setStatusCode(200);
         dto.setMessage("Purchase order updated successfully.");
@@ -40,26 +40,27 @@ public class PurchaseOrderController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deletePurchaseOrder(@PathVariable Long id){
+    public String deletePurchaseOrder(@PathVariable Long id) {
         purchaseOrderService.deletePurchaseOrder(id);
         return "Purchase order deleted successfully";
     }
 
     @GetMapping("/fetch/{id}")
-    public ResponseEntity<PurchaseOrderResponseDTO> getPurchaseOrder(@PathVariable Long id){
-        PurchaseOrder po=this.purchaseOrderService.getPurchaseOrderById(id);
-        PurchaseOrderResponseDTO dto=new PurchaseOrderResponseDTO();
+    public ResponseEntity<PurchaseOrderResponseDTO> getPurchaseOrder(@PathVariable Long id) {
+        PurchaseOrder po = this.purchaseOrderService.getPurchaseOrderById(id);
+        PurchaseOrderResponseDTO dto = new PurchaseOrderResponseDTO();
         dto.setPurchaseOrder(po);
         dto.setStatusCode(201);
-        dto.setMessage("Found Purchase order with ID: "+id);
+        dto.setMessage("Found Purchase order with ID: " + id);
         return ResponseEntity.status(201).body(dto);
     }
 
     @GetMapping("/fetchAll")
-    public ResponseEntity<List<PurchaseOrder>> getAllPurchaseOrders(){
-        List<PurchaseOrder> orders=purchaseOrderService.getAllPurchaseOrders();
+    public ResponseEntity<List<PurchaseOrder>> getAllPurchaseOrders() {
+        List<PurchaseOrder> orders = purchaseOrderService.getAllPurchaseOrders();
         return ResponseEntity.status(200).body(orders);
     }
+
     @GetMapping("/fetchAllPagination")
     public ResponseEntity<Page<PurchaseOrder>> getAllPurchaseOrderWithPagination(
             @RequestParam(defaultValue = "0") int page,
