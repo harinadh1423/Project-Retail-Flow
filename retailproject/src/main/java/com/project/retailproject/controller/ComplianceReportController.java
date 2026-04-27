@@ -5,6 +5,7 @@ import com.project.retailproject.dto.ComplianceReportResponseDTO;
 import com.project.retailproject.model.ComplianceReport;
 import com.project.retailproject.service.ComplianceReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,6 +57,15 @@ public class ComplianceReportController {
     public ResponseEntity<String> deleteComplianceReport(@PathVariable Long reportId) {
         complianceReportService.deleteComplianceReport(reportId);
         return ResponseEntity.ok().body("Successfully deleted the compliance report with ID: " + reportId);
+    }
+
+    @GetMapping("/fetchAllPagination")
+    public ResponseEntity<Page<ComplianceReport>> getAllComplianceReportsWithPagination(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Page<ComplianceReport> ComplianceReportsPage = complianceReportService.getAllPagesWithPagination(page, size);
+        return ResponseEntity.ok(ComplianceReportsPage);
     }
 
 

@@ -22,7 +22,6 @@ public class Catalog {
 
     private Date effectiveDate;
 
-
     private Date expiryDate;
 
     private String status;

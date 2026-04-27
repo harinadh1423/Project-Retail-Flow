@@ -15,7 +15,7 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long invoiceId;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "saleId")
     private Sale sale;
 
@@ -73,7 +73,6 @@ public class Invoice {
     public String toString() {
         return "Invoice{" +
                 "invoiceId=" + invoiceId +
-                ", sale=" + sale +
                 ", amount=" + amount +
                 ", date=" + date +
                 ", status='" + status + '\'' +

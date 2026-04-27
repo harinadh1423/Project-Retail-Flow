@@ -20,6 +20,7 @@ import java.util.List;
 public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
+
     @PostMapping("/insert")
     public ResponseEntity<InvoiceResponseDTO> insertInvoice(@RequestBody InvoiceDTO invoiceDTO){
         Invoice i=this.invoiceService.insertInvoice(invoiceDTO.getInvoice());

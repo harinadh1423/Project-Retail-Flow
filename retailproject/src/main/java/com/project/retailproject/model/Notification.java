@@ -11,9 +11,17 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notificationId;
 
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
     @ManyToOne
     @JoinColumn(name = "userId")
-    private Long userId;
+    private User userId;
 
     private String message;
     private String category;
@@ -30,13 +38,7 @@ public class Notification {
         this.notificationId = notificationId;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 
     public String getMessage() {
         return message;
